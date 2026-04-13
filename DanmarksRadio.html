@@ -19,6 +19,8 @@
     </nav>
     <div id="app" class="container py-4">
         <h1 class="mb-4 text-primary">Danmarks Radio</h1>
+        <input type="number" v-model="searchId" placeholder="Id">
+        <button @click="GetById(searchId)">Find</button>
         <table class="table table-striped">
             <thead>
                 <tr>
