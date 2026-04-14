@@ -4,7 +4,12 @@ Vue.createApp({
     data() {
         return {
             items: [],
-            searchId: null
+            searchId: null,
+            searchTitle: "",
+            newTitle: "",
+            newArtist: "",
+            newDuration: null,
+            newPublishedYear: null
         }
     },
     mounted() {
@@ -18,6 +23,20 @@ Vue.createApp({
         async GetById(id) {
             const response = await axios.get(app + "/" + id);
             this.items = [response.data];
+        },
+        async GetByTitle(title) {
+            const response = await axios.get(app + "/title/" + title);
+            this.items = response.data;
+        },
+        async add() {
+            const newItem = {
+                title: this.newTitle,
+                artist: this.newArtist,
+                duration: this.newDuration,
+                publishedYear: this.newPublishedYear
+            };
+            await axios.post(app, newItem);
+            this.GetAll();
         }
     }
 }).mount("#app")

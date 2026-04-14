@@ -21,7 +21,16 @@
         <h1 class="mb-4 text-primary">Danmarks Radio</h1>
         <input type="number" v-model="searchId" placeholder="Id">
         <button @click="GetById(searchId)">Find</button>
-        <table class="table table-striped">
+        <input type="text" v-model="searchTitle" placeholder="Title">
+        <button @click="GetByTitle(searchTitle)">Søg</button>
+        <h3 class="mt-4">Tilføj ny sang</h3>
+        <input type="text" v-model="newTitle" placeholder="Title">
+        <input type="text" v-model="newArtist" placeholder="Artist">
+        <input type="number" v-model="newDuration" placeholder="Duration">
+        <input type="number" v-model="newPublishedYear" placeholder="Published Year">
+        <button @click="add()">Tilføj</button>
+
+        <table class="table table-striped mt-3">
             <thead>
                 <tr>
                     <th>Id</th>
