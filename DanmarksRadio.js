@@ -37,6 +37,16 @@ Vue.createApp({
             };
             await axios.post(app, newItem);
             this.GetAll();
+        },
+
+        async opdater(item) {
+            await axios.put(app + "/" + item.id, item);
+            this.GetAll();
+        },
+
+        async slet(id) {
+            await axios.delete(app + "/" + id);
+            this.GetAll();
         }
     }
 }).mount("#app")
