@@ -9,13 +9,34 @@ Vue.createApp({
             newTitle: "",
             newArtist: "",
             newDuration: null,
-            newPublishedYear: null
+            newPublishedYear: null,
+            username: "",
+            password: "",
+            token: "",
+            loginError: ""
         }
     },
     mounted() {
         this.GetAll();
     },
     methods: {
+        async login() {
+            try {
+                const res = await axios.post("http://localhost:5181/api/Auth/login", {
+                    username: this.username,
+                    password: this.password
+                });
+                this.token = res.data.token || res.data;
+                axios.defaults.headers.common["Authorization"] = "Bearer " + this.token;
+                this.loginError = "";
+            } catch {
+                this.loginError = "Forkert brugernavn eller password";
+            }
+        },
+        logout() {
+            this.token = "";
+            delete axios.defaults.headers.common["Authorization"];
+        },
         async GetAll() {
             const response = await axios.get(app);
             this.items = response.data;

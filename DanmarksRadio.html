@@ -19,6 +19,19 @@
     </nav>
     <div id="app" class="container py-4">
         <h1 class="mb-4 text-primary">Danmarks Radio</h1>
+
+        <div v-if="!token" class="card p-3 mb-4" style="max-width: 400px;">
+            <h3>Login</h3>
+            <input class="form-control mb-2" type="text" v-model="username" placeholder="Brugernavn">
+            <input class="form-control mb-2" type="password" v-model="password" placeholder="Password">
+            <button class="btn btn-primary" @click="login()">Log ind</button>
+            <div v-if="loginError" class="text-danger mt-2">{{ loginError }}</div>
+        </div>
+        <div v-else class="mb-3">
+            <span class="me-2">Logget ind som <strong>{{ username }}</strong></span>
+            <button class="btn btn-outline-secondary btn-sm" @click="logout()">Log ud</button>
+        </div>
+
         <input type="number" v-model="searchId" placeholder="Id">
         <button @click="GetById(searchId)">Find</button>
         <input type="text" v-model="searchTitle" placeholder="Title">
